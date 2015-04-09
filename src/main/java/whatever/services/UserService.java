@@ -3,7 +3,7 @@ package whatever.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import whatever.models.User;
-import whatever.models.UserDao;
+import whatever.daos.UserDao;
 
 /**
  * Created by lijc on 15/4/6.
@@ -19,10 +19,13 @@ public class UserService {
     }
 
     public User update(User user){
-        User updateingUser = userDao.findById(user.getId());
-        updateingUser.setWeibo(user.getWeibo());
-        updateingUser.setWeixin(user.getWeixin());
-        return userDao.save(updateingUser);
+        User updatingUser = userDao.findById(user.getId());
+        if (!"".equals(user.getWeixin()) && null != user.getWeixin())
+            updatingUser.setWeixin(user.getWeixin());
+        if (!"".equals(user.getWeibo()) && null != user.getWeibo())
+            updatingUser.setWeibo(user.getWeibo());
+
+        return userDao.save(updatingUser);
     }
 
     public User findByPhoneNum(String phoneNum){

@@ -1,8 +1,8 @@
 package whatever.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 /**
  * 公众号
@@ -24,12 +24,14 @@ public class Account extends BaseModel{
 
     private String info;
 
+    private String img;
+
     private String QRImg;
 
     private int sn;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "accountId")
-    private List<Article> articles;
+//    @OneToMany(mappedBy = "accountId",fetch = FetchType.LAZY)
+//    private List<Article> articles;
 
 
     public String getOpenId() {
@@ -64,6 +66,14 @@ public class Account extends BaseModel{
         this.info = info;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public String getQRImg() {
         return QRImg;
     }
@@ -80,11 +90,11 @@ public class Account extends BaseModel{
         this.sn = sn;
     }
 
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
+//    public List<Article> getArticles() {
+//        return articles;
+//    }
+//
+//    public void setArticles(List<Article> articles) {
+//        this.articles = articles;
+//    }
 }

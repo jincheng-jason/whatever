@@ -1,6 +1,7 @@
 package whatever.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -10,8 +11,9 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "article")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Article extends BaseModel{
-
 
     @NotNull
     private String title;
@@ -29,13 +31,26 @@ public class Article extends BaseModel{
 
     private Date lastModified;
 
-
     private String accountName;
 
-    @ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="account_id", nullable=true)
-    private Account accountId;
+    //首要文章为大图显示，非首要为小图显示
+    @NotNull
+    private Boolean isChief;
 
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="account_id", nullable=true)
+//    @JsonIgnore
+    @NotNull
+    private Long accountId;
+
+    //manyToMany 以后留作tag之用
+//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinTable(name = "article_category",joinColumns = @JoinColumn(name = "article_id"),inverseJoinColumns = @JoinColumn(name = "category_id"))
+//    @JsonManagedReference("cate")
+//    private List<Category> categories = new ArrayList<>();
+
+    @NotNull
+    private Long categoryId;
 
     public String getTitle() {
         return title;
@@ -101,11 +116,36 @@ public class Article extends BaseModel{
         this.accountName = accountName;
     }
 
-    public Account getAccountId() {
-        return accountId;
+
+    public long getAccountId() {
+        return accountId == null ? 0 : accountId;
     }
 
-    public void setAccountId(Account accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
+
+    public Long getCategoryId() {
+        return categoryId == null ? 0 : categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public Boolean getIsChief() {
+        return isChief == null ? false : isChief;
+    }
+
+    public void setIsChief(Boolean isChief) {
+        this.isChief = isChief;
+    }
+
+    //    public void setCategories(List<Category> categories) {
+//        this.categories = categories;
+//    }
+//
+//    public List<Category> getCategories(){
+//        return categories;
+//    }
 }

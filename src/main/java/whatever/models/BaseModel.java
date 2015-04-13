@@ -1,6 +1,7 @@
 package whatever.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,13 +16,15 @@ public abstract class BaseModel {
 //    @GeneratedValue(generator="idGenerator")
 //    @GenericGenerator(name="idGenerator", strategy="uuid")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Long id;
 
 //    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonIgnore
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private Date createTime;
 
 //    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @JsonIgnore
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private Date updateTime;
 
@@ -43,7 +46,7 @@ public abstract class BaseModel {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

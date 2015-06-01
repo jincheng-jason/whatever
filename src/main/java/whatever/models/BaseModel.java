@@ -1,6 +1,5 @@
 package whatever.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -20,12 +19,11 @@ public abstract class BaseModel {
 
 //    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @JsonIgnore
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private Date createTime;
 
 //    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @JsonIgnore
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd' 'HH:mm:ss")
     private Date updateTime;
 
     @PrePersist
@@ -43,7 +41,7 @@ public abstract class BaseModel {
     }
 
     public long getId() {
-        return id;
+        return id == null ? 0L : id;
     }
 
     public void setId(Long id) {
@@ -54,6 +52,7 @@ public abstract class BaseModel {
         this.updateTime = updateTime;
     }
 
+//    @JsonSerialize(using = DateSerialize.class)
     public Date getCreateTime() {
         return createTime;
     }

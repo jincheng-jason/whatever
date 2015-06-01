@@ -2,7 +2,6 @@ package whatever.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by lijc on 15/4/5.
@@ -15,11 +14,13 @@ public class User extends BaseModel{
     // ==============
 
 
-    @NotNull
+//    @NotNull
     private String phoneNum;
 
-    @NotNull
+//    @NotNull
     private String password;
+
+    private String nikeName;
 
     //微信账号
     private String weixin;
@@ -27,7 +28,11 @@ public class User extends BaseModel{
     //微博账号
     private String weibo;
 
+    //附加信息
+    private String append;
 
+    //cloud id
+    private String cloudId;
 
     // ==============
     // PUBLIC METHODS
@@ -65,5 +70,27 @@ public class User extends BaseModel{
         this.weibo = weibo;
     }
 
+    public String getAppend() {
+        return append;
+    }
 
+    public void setAppend(String append) {
+        this.append = append;
+    }
+
+    public String getCloudId() {
+        return cloudId;
+    }
+
+    public void setCloudId(String cloudId) {
+        this.cloudId = cloudId;
+    }
+
+    public String getNikeName() {
+        return nikeName;
+    }
+
+    public void setNikeName(String nikeName) {
+        this.nikeName = nikeName;
+    }
 }

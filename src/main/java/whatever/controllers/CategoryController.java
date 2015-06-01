@@ -14,7 +14,7 @@ import whatever.services.CategoryService;
 /**
  * Created by lijc on 15/4/10.
  */
-@Api(basePath = "/category", value = "category", description = "公众号文章分类", produces = "application/json")
+@Api(basePath = "/category", value = "category", description = "公众号文章分类", produces = "application/json",position = 3)
 @RestController
 @RequestMapping("/category")
 public class CategoryController {

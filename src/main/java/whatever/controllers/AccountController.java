@@ -11,7 +11,7 @@ import whatever.services.AccountService;
 /**
  * Created by lijc on 15/4/7.
  */
-@Api(basePath = "/account", value = "account", description = "公众账号", produces = "application/json")
+@Api(basePath = "/account", value = "account", description = "公众账号", produces = "application/json",position = 2)
 @RestController
 @RequestMapping("/account")
 public class AccountController {
@@ -19,12 +19,6 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-    /**
-     * 通过account对象查找公众号信息
-     *
-     * @param account
-     * @return
-     */
     @Monitored
     @ApiOperation(httpMethod = "POST", value = "通过account对象查找公众号信息", response = Account.class)
     @RequestMapping(value = "/find", method = RequestMethod.POST)
@@ -50,6 +44,15 @@ public class AccountController {
     @ResponseBody
     Iterable<Account> findAll() {
         return accountService.findAll();
+    }
+
+    @Monitored
+    @ApiOperation(httpMethod = "GET", value = "获取推荐公众号列表")
+    @RequestMapping(value = "/findCommend", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    Iterable<Account> findCommend() {
+        return accountService.findCommend();
     }
 
 //    @RequestMapping(value = "/findByAccountName/{accountName}", method = RequestMethod.GET)

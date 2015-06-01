@@ -30,6 +30,10 @@ public class Account extends BaseModel{
 
     private int sn;
 
+    private boolean isCommended;
+
+    private String originImg;
+
 //    @OneToMany(mappedBy = "accountId",fetch = FetchType.LAZY)
 //    private List<Article> articles;
 
@@ -97,4 +101,21 @@ public class Account extends BaseModel{
 //    public void setArticles(List<Article> articles) {
 //        this.articles = articles;
 //    }
+
+
+    public boolean getIsCommended() {
+        return isCommended;
+    }
+
+    public void setIsCommended(boolean isCommended) {
+        this.isCommended = isCommended;
+    }
+
+    public String getOriginImg() {
+        return originImg;
+    }
+
+    public void setOriginImg(String originImg) {
+        this.originImg = originImg;
+    }
 }

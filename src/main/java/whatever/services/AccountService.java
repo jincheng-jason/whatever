@@ -42,6 +42,10 @@ public class AccountService {
         return accountDao.findByOpenId(openId);
     }
 
+    public Iterable<Account> findCommend(){
+        return accountDao.findByIsCommended(true);
+    }
+
     public void updateAccountAndArticle(){
         Iterable<Article> articles = articleDao.findAll();
         for (Article article : articles){

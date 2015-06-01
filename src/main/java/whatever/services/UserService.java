@@ -14,12 +14,14 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public void save(User user){
-        userDao.save(user);
+    public User save(User user){
+        User result = userDao.save(user);
+        userDao.flush();
+        return result;
     }
 
     public User update(User user){
-        User updatingUser = userDao.findById(user.getId());
+        User updatingUser = userDao.findByPhoneNumAndPassword(user.getPhoneNum(),user.getPassword());
         if (!"".equals(user.getWeixin()) && null != user.getWeixin())
             updatingUser.setWeixin(user.getWeixin());
         if (!"".equals(user.getWeibo()) && null != user.getWeibo())
@@ -30,6 +32,18 @@ public class UserService {
 
     public User findByPhoneNum(String phoneNum){
         return userDao.findByPhoneNum(phoneNum);
+    }
+
+    public Iterable<User> findByWeibo(String weibo){
+        return userDao.findByWeiboAndWeiboIsNotNull(weibo);
+    }
+
+    public Iterable<User> findByWeixin(String weixin){
+        return userDao.findByWeixinAndWeixinIsNotNull(weixin);
+    }
+
+    public Iterable<User> findByWeiboOrWeixin(String weibo,String weixin){
+        return userDao.findByWeiboOrWeixin(weibo,weixin);
     }
 
 }

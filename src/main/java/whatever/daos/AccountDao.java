@@ -19,6 +19,8 @@ public interface AccountDao extends JpaRepository<Account, Long> {
 
     public Account findByOpenId(String openId);
 
+    public Iterable<Account> findByIsCommended(Boolean isCommend);
+
 //    @Query("select a from Account a")
 //    public Iterable<Account> JustFindAll();
 }

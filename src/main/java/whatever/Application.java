@@ -14,8 +14,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 @EnableSwagger
 @EnableAutoConfiguration
-//@Import(JPAMySQLConfiguration.class)
-//@EnableJpaRepositories
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {

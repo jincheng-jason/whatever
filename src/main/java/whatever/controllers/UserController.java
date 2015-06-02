@@ -63,6 +63,8 @@ public class UserController {
         String phoneNum = user.getPhoneNum();
         CloudUser cloudUser = null;
         User outputUser = userService.findByPhoneNum(phoneNum);
+        //以验证码为初始密码
+        user.setPassword(verifyCode);
         if (outputUser == null)
             outputUser = userService.save(user);
         try {
